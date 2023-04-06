@@ -1,0 +1,30 @@
+#Note 1:
+from matplotlib import pyplot as pl
+import numpy as np
+
+#Note 2 - Iterations:
+#Population stability and chaos
+
+t = 150 #This is the total number of iterations
+
+c = np.zeros(t+1) #counting iteration
+p = np.zeros(t+1) #Population in each iteration
+
+c[0] = 0
+p[0] = 0.1 #Can be any number between 0 and 1
+
+r = float(input(' "Growth" rate of the population: '))
+
+for i in range(t):
+    p[i+1] = r*p[i]*(1-p[i])
+    c[i+1] = c[i] + 1
+    if i > t-10:
+          print("p[",i,"] = ", p[i]) #This can be used to see the stabilization, if it extists, for r <= 4
+
+#Note 3 - Plot:
+#Plot of the stability
+pl.style.use('dark_background')
+fig, ax = pl.subplots()
+ax.plot(c, p, alpha=0.5)
+ax.set(xlabel='Iterations', ylabel='Population')
+pl.show()
